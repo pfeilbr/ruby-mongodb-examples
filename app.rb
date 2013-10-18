@@ -1,8 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'mongo'
-require 'databasedotcom'
-require 'databasedotcom_additions'
 require 'pp'
 
 include Mongo
