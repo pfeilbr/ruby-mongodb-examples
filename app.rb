@@ -23,6 +23,9 @@ users = db['users']
 puts %{delete all users if any exists}
 users.remove()
 
+puts %{create_index on name}
+users.create_index({name: Mongo::ASCENDING})
+
 puts %{create some users with a random age}
 1000.times {|i| users.save({name: %{user#{i}}, age: (1..70).to_a.sample}) }
 
@@ -37,3 +40,13 @@ pp users.find({name: 'user5'}, fields: ['age']).to_a
 
 puts %{count of users that have an age of 10}
 pp users.find({age: 10}).count
+
+puts %{write file to GridFS}
+gridfs = GridFileSystem.new(db)
+filename = 'test.txt'
+gridfs.open(filename, 'w') do |f|
+  f.write "Hello, world!"
+end
+
+puts %{read file "#{filename}" from GridFS}
+pp gridfs.open(filename, 'r').read
