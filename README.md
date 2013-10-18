@@ -13,7 +13,7 @@ start mongodb
 
 	mongod
 
-install gem dependncies
+install gem dependencies
 
 	bundle install
 
